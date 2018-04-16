@@ -36,11 +36,16 @@ public class RepositorioProdutoArrayList {
 	 * implementacao com arrays por questoes de localizacao. Outras classes que
 	 * utilizam outras estruturas internas podem nao precisar desse método.
 	 * 
-	 * @param codigo
-	 * @return
+	 * @param codigo codigo do produto
+	 * @return indice do produto procurando
 	 */
 	private int procurarIndice(int codigo) {
-		// TODO Implement your code here
+		for(int i = 0; i < this.produtos.size(); i++) {
+			Produto produtoAtual = (Produto) this.produtos.get(i);
+			if(produtoAtual.getCodigo() == codigo) {
+				return i;
+			}
+		}
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}
 
@@ -51,16 +56,17 @@ public class RepositorioProdutoArrayList {
 	 * @return
 	 */
 	public boolean existe(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		Produto produto = this.procurar(codigo);
+		return this.produtos.contains(produto);
 	}
 
 	/**
 	 * Insere um novo produto (sem se preocupar com duplicatas)
+	 * 
+	 * @param produto produto a ser inserido
 	 */
 	public void inserir(Produto produto) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		this.produtos.add(produto);
 	}
 
 	/**
@@ -69,8 +75,11 @@ public class RepositorioProdutoArrayList {
 	 * utilizado.
 	 */
 	public void atualizar(Produto produto) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(!this.produtos.contains(produto)){
+			throw new UnsupportedOperationException("Not implemented yet!");			
+		}
+		int indice = this.procurarIndice(produto.getCodigo());
+		this.produtos.set(indice, produto);
 	}
 
 	/**
@@ -93,7 +102,12 @@ public class RepositorioProdutoArrayList {
 	 * @return
 	 */
 	public Produto procurar(int codigo) {
-		// TODO Implement your code here
+		for(Object objeto : this.produtos) {
+			Produto produto = (Produto) objeto;
+			if(produto.getCodigo() == codigo) {
+				return produto;
+			}
+		}
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}
 }
