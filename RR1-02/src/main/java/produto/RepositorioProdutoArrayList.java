@@ -46,7 +46,7 @@ public class RepositorioProdutoArrayList {
 				return i;
 			}
 		}
-		throw new UnsupportedOperationException("Not implemented yet!");
+		throw new IllegalArgumentException("Not implemented yet!");
 	}
 
 	/**
@@ -57,6 +57,9 @@ public class RepositorioProdutoArrayList {
 	 */
 	public boolean existe(int codigo) {
 		Produto produto = this.procurar(codigo);
+		if (produto == null) {
+			throw new IllegalArgumentException("Not implemented yet!");
+		}
 		return this.produtos.contains(produto);
 	}
 
@@ -76,7 +79,7 @@ public class RepositorioProdutoArrayList {
 	 */
 	public void atualizar(Produto produto) {
 		if(!this.produtos.contains(produto)){
-			throw new UnsupportedOperationException("Not implemented yet!");			
+			throw new IllegalArgumentException("Not implemented yet!");			
 		}
 		int indice = this.procurarIndice(produto.getCodigo());
 		this.produtos.set(indice, produto);
@@ -84,14 +87,17 @@ public class RepositorioProdutoArrayList {
 
 	/**
 	 * Remove produto com determinado codigo, se existir, ou entao retorna um
-	 * erro, caso contrário. Note que a remoção NÃO pode deixar "buracos" no
+	 * erro, caso contrario. Note que a remocao. Nao pode deixar "buracos" no
 	 * array.
 	 * 
 	 * @param codigo
 	 */
 	public void remover(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		Produto produto = this.procurar(codigo);
+		if (produto == null) {
+			throw new IllegalArgumentException("Not implemented yet!");
+		}
+		this.produtos.remove(produto);
 	}
 
 	/**
@@ -108,6 +114,6 @@ public class RepositorioProdutoArrayList {
 				return produto;
 			}
 		}
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return null;
 	}
 }

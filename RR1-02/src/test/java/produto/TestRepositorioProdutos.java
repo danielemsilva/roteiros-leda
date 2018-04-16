@@ -20,20 +20,20 @@ public class TestRepositorioProdutos {
 
 	@Test
 	public void testInserir() {
-		repositorio.inserir(new Produto(5,"Feijao",10.0,"Feijão carioca"));
+		repositorio.inserir(new Produto(5,"Feijao",10.0,"Feijao carioca"));
 		assertTrue(repositorio.existe(5));
 	}
 
 	@Test
 	public void testAtualizar() {
-		repositorio.inserir(new Produto(5,"Feijao",10.0,"Feijão carioca"));
-		repositorio.atualizar(new Produto(5,"Feijao",10.0,"Feijão macassar"));
-		assertEquals("Feijão macassar",repositorio.procurar(5).getDescricao());
+		repositorio.inserir(new Produto(5,"Feijao",10.0,"Feijao carioca"));
+		repositorio.atualizar(new Produto(5,"Feijao",10.0,"Feijao macassar"));
+		assertEquals("Feijao macassar",repositorio.procurar(5).getDescricao());
 	}
 
 	@Test
 	public void testRemover() {
-		repositorio.inserir(new Produto(5,"Feijao",10.0,"Feijão carioca"));
+		repositorio.inserir(new Produto(5,"Feijao",10.0,"Feijao carioca"));
 		repositorio.remover(5);
 		assertFalse(repositorio.existe(5));
 	}
@@ -41,8 +41,8 @@ public class TestRepositorioProdutos {
 	@Test
 	public void testProcurar() {
 		assertNull(repositorio.procurar(5));
-		repositorio.inserir(new Produto(5,"Feijao",10.0,"Feijão carioca"));
-		assertNotNull(repositorio.procurar(5));		
+		repositorio.inserir(new Produto(5,"Feijao",10.0,"Feijao carioca"));
+		assertNotNull(repositorio.procurar(5));
 	}
 
 }
