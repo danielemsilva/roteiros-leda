@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import sorting.AbstractSorting;
 import sorting.divideAndConquer.*;
+import sorting.divideAndConquer.threeWayQuicksort.ThreeWayQuickSort;
 
 public class StudentSortingTest {
 
@@ -31,15 +32,13 @@ public class StudentSortingTest {
 		getImplementation();
 	}
 
-	// // MÉTODOS AUXILIARES DA INICIALIZAÇÃO
+	// METODOS AUXILIARES DA INICIALIZACAO
 	/**
-	 * Método que inicializa a implementação a ser testada com a implementação
+	 * Metodo que inicializa a implementação a ser testada com a implementação
 	 * do aluno
 	 */
 	private void getImplementation() {
-		// TODO O aluno deve instanciar sua implementação abaixo ao invés de
-		// null
-		this.implementation = new QuickSort();
+		this.implementation = new ThreeWayQuickSort<>();
 	}
 
 	public void populaVetorTamanhoPar(Integer[] arrayPadrao) {
@@ -60,9 +59,9 @@ public class StudentSortingTest {
 				.copyOf(arrayPadrao, arrayPadrao.length);
 	}
 
-	// FIM DOS METODOS AUXILIARES DA INICIALIZAÇÃO
+	// FIM DOS METODOS AUXILIARES DA INICIALIZACAO
 
-	// MÉTODOS DE TESTE
+	// METODOS DE TESTE
 
 	public void genericTest(Integer[] array) {
 		Integer[] copy1 = {};
@@ -99,7 +98,7 @@ public class StudentSortingTest {
 		genericTest(vetorValoresRepetidos);
 	}
 
-	// MÉTODOS QUE OS ALUNOS PODEM CRIAR
+	// METODOS QUE OS ALUNOS PODEM CRIAR
 	/**
 	 * O ALUNO PODE IMPLEMENTAR METODOS DE ORDENAÇÃO TESTANDO O SORT COM TRES
 	 * ARGUMENTOS PARA TESTAR A ORDENACAO EM UM PEDAÇO DO ARRAY. DICA: PROCUREM
