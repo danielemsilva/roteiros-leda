@@ -18,8 +18,8 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
       T pivot = array[rightIndex];
 
       int j = leftIndex - 1;
-      // Here goes through the array looking for the smallest 
-      // and switching to the first positions
+      // Here will scroll through the array looking for the values  
+      // smaller or equal to the pivot and switching to the first positions
       for (int i = leftIndex; i < rightIndex; i++) {
          if (array[i].compareTo(pivot) <= 0) {
             j++;
@@ -27,7 +27,7 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
          }
       }
       Util.swap(array, j + 1, rightIndex);
-      // This index indicates the number that is in the middle
+      // This index indicates the new position of the ordered pivot
       return j + 1;
    }
 
