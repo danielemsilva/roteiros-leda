@@ -46,9 +46,19 @@ public class MergeSort<T extends Comparable<T>> extends AbstractSorting<T> {
 			k++;
 		}
 	}
-	
+
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
+		// Exceptional cases
+		if (array == null || array.length == 0) {
+			return;
+		}
+		if (leftIndex > rightIndex) {
+			return;
+		}
+		if (leftIndex < 0 || rightIndex >= array.length) {
+			return;
+		}
 		// leftIndex should not exceed the rightIndex
 		if (leftIndex < rightIndex) {
 			// Finds the middle position

@@ -24,11 +24,21 @@ public class ThreeWayQuickSort<T extends Comparable<T>> extends AbstractSorting<
 	 **/
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
+		// Exceptional cases
+		if (array == null || array.length == 0) {
+			return;
+		}
+		if (leftIndex > rightIndex) {
+			return;
+		}
+		if (leftIndex < 0 || rightIndex >= array.length) {
+			return;
+		}
 		if (leftIndex < rightIndex) {
-			// This partition is the index of the pivot, ensuring that all 
+			// This partition is the index of the pivot, ensuring that all
 			// values greater than the pivot are to its right
 			int particionRight = separate(array, leftIndex, rightIndex);
-			// This partition ensures that all values smaller than the pivot 
+			// This partition ensures that all values smaller than the pivot
 			// are to its left
 			int particionLeft = separateWithPivot(array, leftIndex, particionRight);
 			// Here is the first part of the array, with values smaller than the pivot
@@ -42,7 +52,7 @@ public class ThreeWayQuickSort<T extends Comparable<T>> extends AbstractSorting<
 		// Assumes that the smallest element is in the last position
 		T pivot = array[rightIndex];
 		int j = leftIndex - 1;
-		// Here will scroll through the array looking for the values smaller  
+		// Here will scroll through the array looking for the values smaller
 		// or equal to the pivot and switching to the first positions
 		for (int i = leftIndex; i < rightIndex; i++) {
 			if (array[i].compareTo(pivot) <= 0) {
@@ -59,7 +69,7 @@ public class ThreeWayQuickSort<T extends Comparable<T>> extends AbstractSorting<
 		// Assumes that the smallest element is in the last position
 		T pivot = array[rightIndex];
 		int j = leftIndex - 1;
-		// Here will scroll through the array looking only for the values smaller  
+		// Here will scroll through the array looking only for the values smaller
 		// to the pivot and switching to the first positions
 		for (int i = leftIndex; i < rightIndex; i++) {
 			if (array[i].compareTo(pivot) < 0) {

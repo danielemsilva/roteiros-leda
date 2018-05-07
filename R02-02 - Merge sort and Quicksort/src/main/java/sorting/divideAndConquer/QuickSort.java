@@ -13,32 +13,42 @@ import util.Util;
  */
 public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
 
-   private int separate(T[] array, int leftIndex, int rightIndex) {
-      // Assumes that the smallest element is in the last position
-      T pivot = array[rightIndex];
+	private int separate(T[] array, int leftIndex, int rightIndex) {
+		// Assumes that the smallest element is in the last position
+		T pivot = array[rightIndex];
 
-      int j = leftIndex - 1;
-      // Here will scroll through the array looking for the values  
-      // smaller or equal to the pivot and switching to the first positions
-      for (int i = leftIndex; i < rightIndex; i++) {
-         if (array[i].compareTo(pivot) <= 0) {
-            j++;
-            Util.swap(array, i, j);
-         }
-      }
-      Util.swap(array, j + 1, rightIndex);
-      // This index indicates the new position of the ordered pivot
-      return j + 1;
-   }
+		int j = leftIndex - 1;
+		// Here will scroll through the array looking for the values
+		// smaller or equal to the pivot and switching to the first positions
+		for (int i = leftIndex; i < rightIndex; i++) {
+			if (array[i].compareTo(pivot) <= 0) {
+				j++;
+				Util.swap(array, i, j);
+			}
+		}
+		Util.swap(array, j + 1, rightIndex);
+		// This index indicates the new position of the ordered pivot
+		return j + 1;
+	}
 
-   @Override
-   public void sort(T[] array, int leftIndex, int rightIndex) {
-      if (leftIndex < rightIndex) {
-         int particion = separate(array, leftIndex, rightIndex);
-         // Here is the first part of the array, with values smaller than the pivot
-         sort(array, leftIndex, particion - 1);
-         // In this part are the values greater than the pivot
-         sort(array, particion + 1, rightIndex);
-      }
-   }
+	@Override
+	public void sort(T[] array, int leftIndex, int rightIndex) {
+		// Exceptional cases
+		if (array == null || array.length == 0) {
+			return;
+		}
+		if (leftIndex > rightIndex) {
+			return;
+		}
+		if (leftIndex < 0 || rightIndex >= array.length) {
+			return;
+		}
+		if (leftIndex < rightIndex) {
+			int particion = separate(array, leftIndex, rightIndex);
+			// Here is the first part of the array, with values smaller than the pivot
+			sort(array, leftIndex, particion - 1);
+			// In this part are the values greater than the pivot
+			sort(array, particion + 1, rightIndex);
+		}
+	}
 }

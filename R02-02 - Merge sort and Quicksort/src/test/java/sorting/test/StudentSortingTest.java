@@ -38,7 +38,7 @@ public class StudentSortingTest {
 	 * do aluno
 	 */
 	private void getImplementation() {
-		this.implementation = new ThreeWayQuickSort<>();
+		this.implementation = new MergeSort<>();
 	}
 
 	public void populaVetorTamanhoPar(Integer[] arrayPadrao) {
@@ -96,6 +96,12 @@ public class StudentSortingTest {
 	@Test
 	public void testSort05() {
 		genericTest(vetorValoresRepetidos);
+	}
+	
+	@Test
+	public void testSort06() {
+		implementation.sort(new Integer[] { 6, 41, 32, 7, 26, 4, 37, 49,
+				11, 18, 36 }, 10, 1);
 	}
 
 	// METODOS QUE OS ALUNOS PODEM CRIAR
