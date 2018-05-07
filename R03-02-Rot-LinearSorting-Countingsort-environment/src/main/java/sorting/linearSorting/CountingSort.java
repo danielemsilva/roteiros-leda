@@ -18,7 +18,7 @@ public class CountingSort extends AbstractSorting<Integer> {
 		if (leftIndex > rightIndex) {
 			return;
 		}
-		if (leftIndex < 0 || rightIndex > array.length) {
+		if (leftIndex < 0 || rightIndex >= array.length) {
 			return;
 		}
 		
