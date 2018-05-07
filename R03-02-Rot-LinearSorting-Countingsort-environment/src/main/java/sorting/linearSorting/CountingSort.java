@@ -1,7 +1,5 @@
 package sorting.linearSorting;
 
-import java.util.Arrays;
-
 import sorting.AbstractSorting;
 
 /**
@@ -14,15 +12,26 @@ public class CountingSort extends AbstractSorting<Integer> {
 
 	@Override
 	public void sort(Integer[] array, int leftIndex, int rightIndex) {
+		if (array == null || array.length == 0) {
+			return;
+		}
+		if (leftIndex > rightIndex) {
+			return;
+		}
+		if (leftIndex < 0 || rightIndex > array.length) {
+			return;
+		}
+		
 		int maxValue = searchMax(array);
-
+		// This array will store the amount of elements in their respective indexes
 		Integer[] countArray = new Integer[maxValue + 1];
+		// This array will store the ordered elements
 		Integer[] outputArray = new Integer[array.length];
 		
+		// Initializes the array with elements 0
 		for (int i = 0; i < countArray.length; i++) {
 			countArray[i] = 0;
 		}
-
 		// Stores the quantity of values in the corresponding index
 		for (int i = 0; i < array.length; i++) {
 			int index = array[i];
@@ -32,18 +41,17 @@ public class CountingSort extends AbstractSorting<Integer> {
 		for (int i = 1; i < countArray.length; i++) {
 			countArray[i] = countArray[i] + countArray[i - 1];
 		}
-
 		// Build the output looking for indexes in the countArray
 		for (int i = 0; i < array.length; i++) {
 			int index = countArray[array[i]] - 1;
 			outputArray[index] = array[i];
-			
 			// Decreases the value
 			countArray[array[i]]--;
 		}
-
 		// Copy the outputArray to the array 
-		array = Arrays.copyOf(outputArray, array.length);
+		for (int i = 0; i < outputArray.length; i++) {
+			array[i] = outputArray[i];
+		}
 	}
 
 	private int searchMax(Integer[] array) {
@@ -54,15 +62,7 @@ public class CountingSort extends AbstractSorting<Integer> {
 				max = array[i];
 			}
 		}
-		System.out.println(max);
 		return max;
-	}
-
-	public static void main(String[] args) {
-		CountingSort classe = new CountingSort();
-		Integer[] array = { 2, 4, 5, 6, 2, 9 };
-		classe.sort(array, 0, array.length - 1);
-		System.out.println(Arrays.toString(array));
 	}
 	
 }
