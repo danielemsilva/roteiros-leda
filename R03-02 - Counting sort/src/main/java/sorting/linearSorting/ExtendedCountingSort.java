@@ -12,6 +12,7 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 
 	@Override
 	public void sort(Integer[] array, int leftIndex, int rightIndex) {
+		// Exceptional cases
 		if (array == null || array.length == 0) {
 			return;
 		}
@@ -21,8 +22,9 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 		if (leftIndex < 0 || rightIndex >= array.length) {
 			return;
 		}
-		
+		// Number of positions reserved for positive numbers
 		int maxPosValue = searchMaxPositive(array);
+		// Number of positions reserved for negative numbers
 		int maxNegValue = searchMaxNegative(array);
 		// This array will store the amount of elements in their respective indexes
 		Integer[] countArray = new Integer[maxPosValue + maxNegValue + 2];

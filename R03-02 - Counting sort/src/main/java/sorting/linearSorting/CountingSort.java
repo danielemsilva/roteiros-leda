@@ -12,6 +12,7 @@ public class CountingSort extends AbstractSorting<Integer> {
 
 	@Override
 	public void sort(Integer[] array, int leftIndex, int rightIndex) {
+		// Exceptional cases
 		if (array == null || array.length == 0) {
 			return;
 		}
@@ -21,7 +22,7 @@ public class CountingSort extends AbstractSorting<Integer> {
 		if (leftIndex < 0 || rightIndex >= array.length) {
 			return;
 		}
-		
+		// Number of positions reserved
 		int maxValue = searchMax(array);
 		// This array will store the amount of elements in their respective indexes
 		Integer[] countArray = new Integer[maxValue + 1];
