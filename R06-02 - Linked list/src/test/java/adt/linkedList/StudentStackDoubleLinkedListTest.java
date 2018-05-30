@@ -35,23 +35,31 @@ public class StudentStackDoubleLinkedListTest {
 	@Test
 	public void testTop() {
 		Assert.assertEquals(new Integer(1), lista1.top());
+		Assert.assertEquals(new Integer(1), lista2.top());
 	}
 
 	@Test
 	public void testIsEmpty() {
+		Assert.assertFalse(lista1.isEmpty());
+		Assert.assertFalse(lista2.isEmpty());
 		Assert.assertTrue(lista3.isEmpty());
 	}
 
 	@Test
 	public void testIsFull() {
 		Assert.assertTrue(lista1.isFull());
+		Assert.assertFalse(lista2.isFull());
+		Assert.assertFalse(lista3.isFull());
 	}
 
 	@Test
 	public void testPush() {
 		try {
-			lista2.push(new Integer(5));
-			Assert.assertTrue(lista2.isFull());
+			lista3.push(new Integer(5));
+			Assert.assertFalse(lista3.isEmpty());
+			
+			lista2.push(null);
+			Assert.assertFalse(lista2.isFull());
 		} catch (StackOverflowException e) {
 			e.printStackTrace();
 		}
@@ -69,6 +77,11 @@ public class StudentStackDoubleLinkedListTest {
 		} catch (StackUnderflowException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test(expected = StackUnderflowException.class)
+	public void testPopComErro() throws StackUnderflowException {
+		lista3.pop();
 	}
 
 }

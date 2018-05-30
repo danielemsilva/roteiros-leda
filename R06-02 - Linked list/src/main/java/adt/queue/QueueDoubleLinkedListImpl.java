@@ -18,6 +18,7 @@ public class QueueDoubleLinkedListImpl<T> implements Queue<T> {
       if (this.isFull()) {
          throw new QueueOverflowException();
       }
+      // Inserts the element at the end of the list.
       this.list.insert(element);
    }
 
@@ -27,6 +28,7 @@ public class QueueDoubleLinkedListImpl<T> implements Queue<T> {
          throw new QueueUnderflowException();
       }
       T removed = head();
+      // Removes the element at the beginning of the list.
       this.list.removeFirst();
       return removed;
    }
@@ -34,6 +36,7 @@ public class QueueDoubleLinkedListImpl<T> implements Queue<T> {
    @Override
    public T head() {
       DoubleLinkedListImpl<T> list = (DoubleLinkedListImpl<T>) this.list;
+      // The head is the first of the list.
       return list.getHead().getData();
    }
 

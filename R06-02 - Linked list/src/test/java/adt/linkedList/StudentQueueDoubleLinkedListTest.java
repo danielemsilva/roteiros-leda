@@ -35,23 +35,31 @@ public class StudentQueueDoubleLinkedListTest {
 	@Test
 	public void testTop() {
 		Assert.assertEquals(new Integer(3), lista1.head());
+		Assert.assertEquals(new Integer(1), lista2.head());
 	}
 
 	@Test
 	public void testIsEmpty() {
+		Assert.assertFalse(lista1.isEmpty());
+		Assert.assertFalse(lista2.isEmpty());
 		Assert.assertTrue(lista3.isEmpty());
 	}
 
 	@Test
 	public void testIsFull() {
 		Assert.assertTrue(lista1.isFull());
+		Assert.assertFalse(lista2.isFull());
+		Assert.assertFalse(lista3.isFull());
 	}
 
 	@Test
 	public void testEnqueue() {
 		try {
-			lista2.enqueue(new Integer(5));
-			Assert.assertTrue(lista2.isFull());
+			lista3.enqueue(new Integer(5));
+			Assert.assertFalse(lista3.isEmpty());
+			
+			lista2.enqueue(null);
+			Assert.assertFalse(lista2.isFull());
 		} catch (QueueOverflowException e) {
 			e.printStackTrace();
 		}
@@ -69,6 +77,11 @@ public class StudentQueueDoubleLinkedListTest {
 		} catch (QueueUnderflowException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test(expected = QueueUnderflowException.class)
+	public void testDequeueComErro() throws QueueUnderflowException {
+		lista3.dequeue();
 	}
 
 }

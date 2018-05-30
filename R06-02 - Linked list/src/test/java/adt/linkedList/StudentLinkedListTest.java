@@ -18,7 +18,6 @@ public class StudentLinkedListTest {
 		lista1.insert(3);
 		lista1.insert(2);
 		lista1.insert(1);
-
 	}
 
 	private void getImplementations() {

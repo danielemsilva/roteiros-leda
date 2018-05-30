@@ -28,8 +28,6 @@ public class StudentDoubleLinkedListTest extends StudentLinkedListTest {
 		lista3 = new DoubleLinkedListImpl<>();
 	}
 
-	// Métodos de DoubleLinkedList
-
 	@Test
 	public void testInsertFirst() {
 		((DoubleLinkedList<Integer>) lista1).insertFirst(4);

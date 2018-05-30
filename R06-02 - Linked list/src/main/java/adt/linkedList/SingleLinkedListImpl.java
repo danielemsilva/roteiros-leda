@@ -10,8 +10,7 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public boolean isEmpty() {
-		// Check if the head is empty.
-		// It's the first element of the list.
+		// Checks if the head is empty.
 		return getHead().isNIL();
 	}
 
@@ -61,11 +60,11 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 			SingleLinkedListNode<T> aux = getHead();
 			SingleLinkedListNode<T> prev = aux;
 			while (!aux.getData().equals(element)) {
-				// Save the previous node.
+				// Saves the previous node.
 				prev = aux;
 				aux = aux.getNext();
 			}
-			// Found the node, saves the next of the previous as the next of the deleted.
+			// Saves the next of the previous as the next of the deleted.
 			prev.setNext(aux.getNext());
 		}
 	}
@@ -74,7 +73,6 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 	public T[] toArray() {
 		@SuppressWarnings("unchecked")
 		// Creates a list of objects that will be modified to the node type.
-		// The size is the same as the list.
 		T[] array = (T[]) new Object[this.size()];
 		// Index that will go through the created array.
 		int index = 0;

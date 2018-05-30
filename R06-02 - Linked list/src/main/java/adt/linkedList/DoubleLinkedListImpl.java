@@ -14,13 +14,13 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements 
 			// Creates a new head that has previous.
 			DoubleLinkedListNode<T> newHead = new DoubleLinkedListNode<>(this.head.getData(),
 					(DoubleLinkedListNode<T>) this.head.getNext(), new DoubleLinkedListNode<>());
-			// Creates a new node with previous being the head.
+			// Creates a new node with the next being the head.
 			DoubleLinkedListNode<T> newNode = new DoubleLinkedListNode<>(element, newHead,
 					new DoubleLinkedListNode<>());
 			if (!this.head.isNIL()) {
 				newHead.setPrevious(newNode);
 			}
-			this.head = newNode; // Changes head reference of superclass.
+			this.head = newNode; // Changes head reference.
 			if (this.last.isNIL()) {
 				this.last = newNode; // If the list is empty, last will be the new node.
 			}
@@ -46,7 +46,7 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements 
 	@Override
 	public void removeFirst() {
 		if (size() != 0) {
-			// Creates a new head that has previous.
+			// Creates a new node that has previous.
 			DoubleLinkedListNode<T> headNext = (DoubleLinkedListNode<T>) this.head.getNext();
 			headNext.setPrevious(new DoubleLinkedListNode<>());
 			this.head = headNext;

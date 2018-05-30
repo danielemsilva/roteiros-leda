@@ -18,6 +18,7 @@ public class StackDoubleLinkedListImpl<T> implements Stack<T> {
 		if (this.isFull()) {
 			throw new StackOverflowException();
 		}
+		// Inserts the element at the end of the list.
 		this.top.insert(element);
 	}
 
@@ -27,6 +28,7 @@ public class StackDoubleLinkedListImpl<T> implements Stack<T> {
 			throw new StackUnderflowException();
 		}
 		T removed = top();
+		// Removes the element at the end of the list.
 		this.top.removeLast();
 		return removed;
 	}
@@ -34,6 +36,7 @@ public class StackDoubleLinkedListImpl<T> implements Stack<T> {
 	@Override
 	public T top() {
 		DoubleLinkedListImpl<T> list = (DoubleLinkedListImpl<T>) top;
+		// The top is the last one of the list.
 		return list.getLast().getData();
 	}
 
