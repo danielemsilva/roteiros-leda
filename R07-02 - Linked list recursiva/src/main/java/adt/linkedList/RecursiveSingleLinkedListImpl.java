@@ -6,51 +6,71 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 	protected RecursiveSingleLinkedListImpl<T> next;
 
 	public RecursiveSingleLinkedListImpl() {
-
+		this.data = null;
+		this.next = null;
 	}
 
-	public RecursiveSingleLinkedListImpl(T data,
-			RecursiveSingleLinkedListImpl<T> next) {
+	public RecursiveSingleLinkedListImpl(T data, RecursiveSingleLinkedListImpl<T> next) {
 		this.data = data;
 		this.next = next;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return this.size() == 0;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (this.data == null) {
+			return 0;
+		}
+		return 1 + this.next.size();
 	}
 
 	@Override
 	public T search(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (this.data == null || this.data.equals(element)) {
+			return this.data;
+		}
+		return this.next.search(element);
 	}
 
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (this.data == null) {
+			this.data = element;
+			this.next = new RecursiveSingleLinkedListImpl<>();
+		} else {
+			this.next.insert(element);
+		}
 	}
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (this.data != null) {
+			if (this.data.equals(element)) {
+				this.data = this.next.data;
+				this.next = this.next.next;
+			} else {
+				this.next.remove(element);
+			}
+		}
 	}
 
 	@Override
 	public T[] toArray() {
+		@SuppressWarnings("unchecked")
+		T[] array = (T[]) new Object[1];
+		if (this.data == null) {
+			return array;
+		}
+		array[0] = this.data;
+		
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}
-
+	
 	public T getData() {
 		return data;
 	}
