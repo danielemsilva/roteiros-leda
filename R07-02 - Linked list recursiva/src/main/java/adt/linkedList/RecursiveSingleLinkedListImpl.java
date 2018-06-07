@@ -61,14 +61,16 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 	@Override
 	public T[] toArray() {
 		@SuppressWarnings("unchecked")
-		T[] array = (T[]) new Object[1];
-		if (this.data == null) {
-			return array;
+		T[] array = (T[]) new Object[this.size()];
+		toArray(array, 0, this);
+		return array;
+	}
+	
+	private void toArray(T[] array, int index, RecursiveSingleLinkedListImpl<T> list) {
+		if (!list.isEmpty()) {
+			array[index] = list.data;
+			toArray(array, index + 1, list.next);
 		}
-		array[0] = this.data;
-		
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
 	}
 	
 	public T getData() {
