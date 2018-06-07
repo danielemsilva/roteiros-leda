@@ -13,23 +13,18 @@ public class StudentDoubleLinkedListTest extends StudentLinkedListTest {
 
 		getImplementations();
 
-		// Lista com 3 elementos.
 		lista1.insert(3);
 		lista1.insert(2);
 		lista1.insert(1);
 
-		// Lista com 1 elemento.
 		lista3.insert(1);
 	}
 
 	private void getImplementations() {
-		// TODO O aluno deve ajustar aqui para instanciar sua implementação
 		lista1 = new RecursiveDoubleLinkedListImpl<>();
 		lista2 = new RecursiveDoubleLinkedListImpl<>();
 		lista3 = new RecursiveDoubleLinkedListImpl<>();
 	}
-
-	// Métodos de DoubleLinkedList
 
 	@Test
 	public void testInsertFirst() {

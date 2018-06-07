@@ -17,39 +17,44 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public boolean isEmpty() {
-		return this.size() == 0;
+		return this.data == null;
 	}
 
 	@Override
 	public int size() {
-		if (this.data == null) {
+		if (isEmpty()) {
 			return 0;
 		}
-		return 1 + this.next.size();
+		return 1 + this.getNext().size();
 	}
 
 	@Override
 	public T search(T element) {
-		if (this.data == null || this.data.equals(element)) {
-			return this.data;
+		if (isEmpty() || element == null) {
+			return null;
+		}
+		if (this.data.equals(element)) {
+			return element;
 		}
 		return this.next.search(element);
 	}
 
 	@Override
 	public void insert(T element) {
-		if (this.data == null) {
-			this.data = element;
-			this.next = new RecursiveSingleLinkedListImpl<>();
-		} else {
-			this.next.insert(element);
+		if (element != null) {
+			if (isEmpty()) {
+				this.data = element;
+				this.next = new RecursiveSingleLinkedListImpl<T>();
+			} else {
+				this.next.insert(element);
+			}
 		}
 	}
 
 	@Override
 	public void remove(T element) {
-		if (this.data != null) {
-			if (this.data.equals(element)) {
+		if (element != null && !isEmpty()) {
+			if (this.getData().equals(element)) {
 				this.data = this.next.data;
 				this.next = this.next.next;
 			} else {
@@ -58,21 +63,22 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T[] toArray() {
-		@SuppressWarnings("unchecked")
 		T[] array = (T[]) new Object[this.size()];
-		toArray(array, 0, this);
-		return array;
+		return toArray(array, 0, this);
 	}
-	
-	private void toArray(T[] array, int index, RecursiveSingleLinkedListImpl<T> list) {
-		if (!list.isEmpty()) {
-			array[index] = list.data;
-			toArray(array, index + 1, list.next);
+
+	private T[] toArray(T[] array, int index, RecursiveSingleLinkedListImpl<T> temp) {
+		if (temp.isEmpty()) {
+			return array;
+		} else {
+			array[index] = temp.data;
+			return toArray(array, index + 1, temp.next);
 		}
 	}
-	
+
 	public T getData() {
 		return data;
 	}

@@ -13,16 +13,13 @@ public class StudentLinkedListTest {
 	public void setUp() throws Exception {
 
 		getImplementations();
-
-		// Lista com 3 elementos.
+		
 		lista1.insert(3);
 		lista1.insert(2);
 		lista1.insert(1);
-
 	}
 
 	private void getImplementations() {
-		// TODO O aluno deve ajustar aqui para instanciar sua implementação
 		lista1 = new RecursiveSingleLinkedListImpl<>();
 		lista2 = new RecursiveSingleLinkedListImpl<>();
 	}
