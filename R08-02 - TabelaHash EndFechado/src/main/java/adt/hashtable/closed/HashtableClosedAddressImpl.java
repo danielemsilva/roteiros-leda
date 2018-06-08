@@ -66,12 +66,12 @@ public class HashtableClosedAddressImpl<T> extends AbstractHashtableClosedAddres
 				// then a new list is assigned
 				LinkedList<T> list = new LinkedList<>();
 				list.add(element);
-				table[key] = list;
+				this.table[key] = list;
 			} else {
-				// There is an element in this position already, 
-				// then it checks if the element is already in the list 
+				// There is an element in this position already,
+				// then it checks if the element is already in the list
 				// and increases the collisions
-				if (!containsElement(key, element)) {
+				if (search(element) == null) {
 					((LinkedList<T>) this.table[key]).add(element);
 					this.COLLISIONS++;
 				}
@@ -80,40 +80,47 @@ public class HashtableClosedAddressImpl<T> extends AbstractHashtableClosedAddres
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (element != null && search(element) != null) {
+			// Receives the hash for this element
+			int key = getHash(element);
+			((LinkedList<T>) this.table[key]).remove(element);
+			this.elements--;
+		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T search(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T result = null;
+		if (element != null) {
+			int key = getHash(element);
+			if (this.table[key] != null && ((LinkedList<T>) this.table[key]).contains(element)) {
+				result = element;
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public int indexOf(T element) {
 		int index = -1;
-		if(element != null){
+		if (element != null) {
 			// Receives the hash for this element
 			int key = getHash(element);
-			// Checks whether the element exists in that position 
+			// Checks whether the element exists in that position
 			// and whether the element is contained in the list
-			if(table[key] != null && containsElement(key, element)){
+			if (this.table[key] != null && search(element) != null) {
 				index = key;
-			}		
+			}
 		}
 		return index;
 	}
-	
+
 	private int getHash(T element) {
 		return ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);
-	}
-	
-	@SuppressWarnings("unchecked")
-	private boolean containsElement(int key, T element) {
-		return ((LinkedList<T>) table[key]).contains(element);
 	}
 
 }
