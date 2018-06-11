@@ -1,13 +1,10 @@
 package adt.linkedList;
 
-public class RecursiveDoubleLinkedListImpl<T> extends RecursiveSingleLinkedListImpl<T> 
-	implements DoubleLinkedList<T> {
+public class RecursiveDoubleLinkedListImpl<T> extends RecursiveSingleLinkedListImpl<T> implements DoubleLinkedList<T> {
 
 	protected RecursiveDoubleLinkedListImpl<T> previous;
 
 	public RecursiveDoubleLinkedListImpl() {
-		super();
-		this.previous = null;
 	}
 
 	public RecursiveDoubleLinkedListImpl(T data, RecursiveSingleLinkedListImpl<T> next,
@@ -18,45 +15,56 @@ public class RecursiveDoubleLinkedListImpl<T> extends RecursiveSingleLinkedListI
 
 	@Override
 	public void insertFirst(T element) {
-		if (this.previous == null) {
-			this.previous = new RecursiveDoubleLinkedListImpl<>();
-			this.previous.data = element;
-			this.previous.next = this;
-		} else {
-			this.previous.insertFirst(element);
+		if (element != null) {
+			if (isEmpty()) {
+				insert(element);
+			} else {
+				RecursiveDoubleLinkedListImpl<T> temp = new RecursiveDoubleLinkedListImpl<T>();
+				temp.data = this.data;
+				temp.next = this.next;
+				this.next = temp;
+				this.data = element;
+				((RecursiveDoubleLinkedListImpl<T>) this.next).previous = this;
+			}
 		}
 	}
-	
+
 	@Override
 	public void insert(T element) {
-		if (this.next == null) {
-			RecursiveDoubleLinkedListImpl<T> next = new RecursiveDoubleLinkedListImpl<>();
-			next.data = element;
-			next.previous = this;
-		} else {
-			this.next.insert(element);
+		if (element != null) {
+			if (isEmpty()) {
+				RecursiveDoubleLinkedListImpl<T> temp = new RecursiveDoubleLinkedListImpl<T>();
+				temp.previous = this;
+				this.next = temp;
+				this.data = element;
+			} else {
+				this.next.insert(element);
+			}
 		}
 	}
 
 	@Override
 	public void removeFirst() {
-		if (this.previous.data == null) {
-			RecursiveDoubleLinkedListImpl<T> previousNext = new RecursiveDoubleLinkedListImpl<>();
-			previousNext.data = this.next.data;
-			previousNext.next = this.next.next;
-			previousNext.previous = new RecursiveDoubleLinkedListImpl<>();
-		} else {
-			this.previous.removeFirst();
+		if (!isEmpty()) {
+			if (this.next.isEmpty()) {
+				this.data = null;
+				this.next = null;
+			} else {
+				this.data = this.next.data;
+				this.next = this.next.next;
+			}
 		}
 	}
 
 	@Override
 	public void removeLast() {
-		RecursiveDoubleLinkedListImpl<T> next = (RecursiveDoubleLinkedListImpl<T>) this.next;
-		if (next == null) {
-			this.previous.next = next;
-		} else {
-			next.removeLast();
+		if(!isEmpty()) {
+			if(this.next.isEmpty()) {
+				this.data = null;
+				this.next = null;
+			} else {
+				((RecursiveDoubleLinkedListImpl<T>) this.next).removeLast();
+			}
 		}
 	}
 
