@@ -3,11 +3,9 @@ package adt.hashtable.open;
 import adt.hashtable.hashfunction.HashFunctionClosedAddressMethod;
 import adt.hashtable.hashfunction.HashFunctionLinearProbing;
 
-public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
-		AbstractHashtableOpenAddress<T> {
+public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends AbstractHashtableOpenAddress<T> {
 
-	public HashtableOpenAddressLinearProbingImpl(int size,
-			HashFunctionClosedAddressMethod method) {
+	public HashtableOpenAddressLinearProbingImpl(int size, HashFunctionClosedAddressMethod method) {
 		super(size);
 		hashFunction = new HashFunctionLinearProbing<T>(size, method);
 		this.initiateInternalTable(size);
@@ -15,26 +13,61 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (element != null && search(element) == null) {
+			if (this.isFull()) {
+				throw new HashtableOverflowException();
+			} else {
+				int probe = 0;
+				int posicao = this.getHash(element, probe);
+
+				while (this.table[posicao] != null && !this.table[posicao].equals(new DELETED())) {
+					probe++;
+					posicao = this.getHash(element, probe);
+					this.COLLISIONS++;
+				}
+				this.table[posicao] = element;
+				this.elements++;
+			}
+		}
 	}
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (element != null && this.search(element) != null) {
+			int index = this.indexOf(element);
+			this.table[index] = new DELETED();
+			this.elements--;
+		}
 	}
 
 	@Override
 	public T search(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T result = null;
+		if (this.indexOf(element) != -1) {
+			result = element;
+		}
+		return result;
 	}
 
 	@Override
 	public int indexOf(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (!this.isEmpty() && element != null) {
+			int probe = 0;
+			int index = this.getHash(element, probe);
+
+			while (this.table[index] != null && probe < this.capacity()) {
+				if (this.table[index].equals(element)) {
+					return index;
+				}
+				probe++;
+				index = this.getHash(element, probe);
+			}
+		}
+		return -1;
+	}
+
+	private int getHash(T element, int probe) {
+		return ((HashFunctionLinearProbing<T>) hashFunction).hash(element, probe);
 	}
 
 }
