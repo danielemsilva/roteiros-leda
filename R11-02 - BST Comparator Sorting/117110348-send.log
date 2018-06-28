@@ -2,7 +2,7 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2018-06-11T16:11:33.857-0300</date>
+  <date>2018-06-25T16:20:59.001-0300</date>
   <logger>DANIELE APARECIDA DE MELO SILVA</logger>
   <level>FINE</level>
   <message>File 117110348-DANIELE APARECIDA DE MELO SILVA.zip was received. It was sent by DANIELE APARECIDA DE MELO SILVA from IP 192.168.130.215</message>
@@ -12,18 +12,18 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2018-06-14T20:04:46.080-0300</date>
+  <date>2018-06-25T16:24:41.573-0300</date>
   <logger>DANIELE APARECIDA DE MELO SILVA</logger>
   <level>FINE</level>
-  <message>File 117110348-DANIELE APARECIDA DE MELO SILVA.zip was received. It was sent by DANIELE APARECIDA DE MELO SILVA from IP 169.254.57.3</message>
+  <message>File 117110348-DANIELE APARECIDA DE MELO SILVA.zip was received. It was sent by DANIELE APARECIDA DE MELO SILVA from IP 192.168.130.215</message>
 </record>
 </log>
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2018-06-14T20:05:23.066-0300</date>
+  <date>2018-06-27T15:35:57.870-0300</date>
   <logger>DANIELE APARECIDA DE MELO SILVA</logger>
   <level>FINE</level>
-  <message>File 117110348-DANIELE APARECIDA DE MELO SILVA.zip was received. It was sent by DANIELE APARECIDA DE MELO SILVA from IP 169.254.57.3</message>
+  <message>File 117110348-DANIELE APARECIDA DE MELO SILVA.zip was received. It was sent by DANIELE APARECIDA DE MELO SILVA from IP 192.168.130.215</message>
 </record>
