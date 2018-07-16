@@ -67,8 +67,20 @@ public class RBTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements R
 	 * returns an exception if the black heights are different.
 	 */
 	private boolean verifyBlackHeight() {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return verifyBlackHeight((RBNode<T>) root);
+	}
+	
+	private boolean verifyBlackHeight(RBNode<T> node) {
+		if (node.isEmpty()) {
+			return true;
+		}
+		
+		RBNode<T> leftNode = (RBNode<T>) node.getLeft();
+		RBNode<T> rightNode = (RBNode<T>) node.getRight();
+		if (blackHeight(leftNode) == blackHeight(rightNode)) {
+			return verifyBlackHeight(leftNode) && verifyBlackHeight(rightNode);
+		}
+		return false;
 	}
 
 	@Override
@@ -85,13 +97,18 @@ public class RBTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements R
 
 	// FIXUP methods
 	protected void fixUpCase1(RBNode<T> node) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (node.equals(root)) {
+			node.setColour(Colour.BLACK);
+		} else {
+			fixUpCase2(node);
+		}
 	}
 
 	protected void fixUpCase2(RBNode<T> node) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		RBNode<T> parent = (RBNode<T>) node.getParent();
+		if (parent.getColour().equals(Colour.RED)) {
+			fixUpCase3(node);
+		}
 	}
 
 	protected void fixUpCase3(RBNode<T> node) {
