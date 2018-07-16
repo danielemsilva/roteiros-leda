@@ -60,8 +60,21 @@ public class RBTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements R
 	 * BLACK.
 	 */
 	private boolean verifyChildrenOfRedNodes() {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return verifyChildrenRedNodes((RBNode<T>) root);
+	}
+
+	private boolean verifyChildrenRedNodes(RBNode<T> node) {
+		if (!node.isEmpty() && node.getColour().equals(Colour.RED)) {
+			RBNode<T> leftNode = (RBNode<T>) node.getLeft();
+			RBNode<T> rightNode = (RBNode<T>) node.getRight();
+
+			if (leftNode.getColour().equals(Colour.RED) || rightNode.getColour().equals(Colour.RED)) {
+				return false;
+			} else {
+				return verifyChildrenRedNodes(leftNode) && verifyChildrenRedNodes(rightNode);
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -132,7 +145,7 @@ public class RBTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements R
 	}
 
 	// FIXUP methods
-	
+
 	protected void fixUpCase1(RBNode<T> node) {
 		if (node.equals(root)) {
 			node.setColour(Colour.BLACK);
@@ -152,7 +165,7 @@ public class RBTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements R
 		RBNode<T> parent = (RBNode<T>) node.getParent();
 		RBNode<T> grand = (RBNode<T>) parent.getParent();
 		RBNode<T> uncle;
-		
+
 		if (grand.getLeft().equals(parent)) {
 			uncle = (RBNode<T>) grand.getRight();
 		} else {
