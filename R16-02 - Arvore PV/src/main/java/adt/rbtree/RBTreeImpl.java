@@ -3,6 +3,7 @@ package adt.rbtree;
 import java.util.ArrayList;
 
 import adt.bst.BSTImpl;
+import adt.bt.Util;
 import adt.rbtree.RBNode.Colour;
 
 public class RBTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements RBTree<T> {
@@ -108,13 +109,11 @@ public class RBTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements R
 	private void insert(T value, RBNode<T> node) {
 		if (node.isEmpty()) {
 			node.setData(value);
-
 			node.setLeft(new RBNode<T>());
 			node.setRight(new RBNode<T>());
-
+			
 			node.getLeft().setParent(node);
 			node.getRight().setParent(node);
-
 			node.setColour(Colour.RED);
 
 			fixUpCase1(node);
@@ -183,12 +182,42 @@ public class RBTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements R
 	}
 
 	protected void fixUpCase4(RBNode<T> node) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		RBNode<T> parent = (RBNode<T>) node.getParent();
+		RBNode<T> grand = (RBNode<T>) parent.getParent();
+
+		if (grand.getLeft().equals(parent) && parent.getRight().equals(node)) {
+			RBNode<T> aux = (RBNode<T>) Util.leftRotation(parent);
+			if (aux.getParent() == null) {
+				this.root = aux;
+			}
+			fixUpCase5((RBNode<T>) node.getLeft());
+		} 
+		else if (grand.getRight().equals(parent) && parent.getLeft().equals(node)) {
+			RBNode<T> aux = (RBNode<T>) Util.rightRotation(parent);
+			if (aux.getParent() == null) {
+				this.root = aux;
+			}
+			fixUpCase5((RBNode<T>) node.getRight());
+		} 
+		else {
+			fixUpCase5(node);
+		}
 	}
 
 	protected void fixUpCase5(RBNode<T> node) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		RBNode<T> parent = (RBNode<T>) node.getParent();
+		parent.setColour(Colour.BLACK);
+		((RBNode<T>) parent.getParent()).setColour(Colour.RED);
+		
+		RBNode<T> aux;
+		if (parent.getLeft().equals(node)) {
+			aux = (RBNode<T>) Util.rightRotation((RBNode<T>) parent.getParent());
+		} else {
+			aux = (RBNode<T>) Util.leftRotation((RBNode<T>) parent.getParent());
+		}
+		
+		if (aux.getParent() == null) {
+			this.root = aux;
+		}
 	}
 }
