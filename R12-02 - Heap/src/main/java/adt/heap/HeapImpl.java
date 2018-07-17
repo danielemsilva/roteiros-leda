@@ -20,10 +20,10 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 	protected T[] heap;
 	protected int index = -1;
 	/**
-	 * O comparador é utilizado para fazer as comparações da heap. O ideal é mudar
-	 * apenas o comparator e mandar reordenar a heap usando esse comparator. Assim
-	 * os metodos da heap não precisam saber se vai funcionar como max-heap ou
-	 * min-heap.
+	 * O comparador é utilizado para fazer as comparações da heap. O ideal é
+	 * mudar apenas o comparator e mandar reordenar a heap usando esse comparator.
+	 * Assim os metodos da heap não precisam saber se vai funcionar como max-heap
+	 * ou min-heap.
 	 */
 	protected Comparator<T> comparator;
 
@@ -69,7 +69,9 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 	public T[] toArray() {
 		ArrayList<T> resp = new ArrayList<T>();
 		for (T elem : this.heap) {
-			resp.add(elem);
+			if (elem != null) {
+				resp.add(elem);
+			}
 		}
 		return (T[]) resp.toArray(new Comparable[0]);
 	}
@@ -113,30 +115,60 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 			heap[index] = element;
 			heapify(index);
 		}
-		System.out.println(Arrays.toString(heap));
 	}
 
 	@Override
 	public void buildHeap(T[] array) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (array != null) {
+			index = -1;
+			for (T elem : array)
+				insert(elem);
+		}
 	}
 
 	@Override
 	public T extractRootElement() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (isEmpty()) {
+			return null;
+		}
+		T extract = rootElement();
+		Util.swap(heap, 0, index);
+		heap[index] = null;
+		index--;
+		heapify(0);
+		return extract;
 	}
 
 	@Override
 	public T rootElement() {
+		if (this.isEmpty()) {
+			return null;
+		}
 		return heap[0];
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T[] heapsort(T[] array) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T[] sorted = array;
+
+		if (array != null && array.length != 0) {
+			for (T element : array) {
+				insert(element);
+			}
+			sorted = (T[]) (new Comparable[size()]);
+
+			if (heap[0].compareTo(heap[index]) > 0) {
+				for (int i = array.length - 1; i >= 0; i--) {
+					sorted[i] = extractRootElement();
+				}
+			} else {
+				for (int i = 0; i < array.length; i++) {
+					sorted[i] = extractRootElement();
+				}
+			}
+		}
+		return sorted;
 	}
 
 	@Override

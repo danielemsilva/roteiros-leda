@@ -61,7 +61,7 @@ public class StudentMaxHeapTest {
 
 		verifyHeap(new Integer[] { 14, 8, 12, 7, 8, -5, -2, 3, -10, 0 });
 	}
-/*
+
 	@Test
 	public void testRemove() {
 		heap.insert(22);
@@ -86,7 +86,7 @@ public class StudentMaxHeapTest {
 
 		verifyHeap(new Integer[] { 22, 17, 15, 26, 30 });
 	}
-*/
+
 	@Test
 	public void testSort() {
 		assertArrayEquals(new Integer[] { 5, 6, 12, 20, 34, 43, 49, 92 },
@@ -102,8 +102,6 @@ public class StudentMaxHeapTest {
 		boolean isHeap = true;
 
 		Comparable<Integer>[] original = heap.toArray();
-		System.out.println("original");
-		System.out.println(Arrays.toString(original));
 		Arrays.sort(expected);
 		Arrays.sort(original);
 
